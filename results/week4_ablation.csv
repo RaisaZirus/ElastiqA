@@ -1,0 +1,12 @@
+section,a,b,c,d
+transients,variant,crest_factor,crest_loss,
+transients,original,11.422,0.000,
+transients,"locked, no transient handling",9.387,2.035,
+transients,locked + phase reset at onsets,11.019,0.403,
+transients,wsola,8.691,2.731,
+formants,method,shift_semitones,f0_hz,formants_hz
+formants,original,0,164.6,431;1507;2519
+formants,plain,-7,110.2,323;991;1658
+formants,formant,-7,110.2,431;1507;2498
+formants,plain,7,247.8,807;1529;2218
+formants,formant,7,247.8,431;1518;2530
