@@ -2,7 +2,7 @@
 
 **Phase-coherent time stretching and pitch shifting in Python — with a reproducible benchmark of the algorithms that do it.**
 
-[![tests](https://github.com/RaisaZirus/ElastiqA/actions/workflows/tests.yml/badge.svg)](https://github.com/RaisaZirus/ElastiqA/elastiqa/actions)
+[![tests](https://github.com/USERNAME/elastiqa/actions/workflows/tests.yml/badge.svg)](https://github.com/USERNAME/elastiqa/actions)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -21,20 +21,23 @@ measures all of them against each other on the same material.
 
 ## Status
 
-Week 1 of 6 — foundation complete.
+Week 4 of 6 — transient preservation and formant-preserving pitch shift.
 
 | Module | Status |
 |---|---|
 | Exactly invertible STFT (weighted overlap-add) | ✅ |
 | Phase arithmetic + instantaneous frequency | ✅ |
 | Naive resampling baseline | ✅ |
-| Standard phase vocoder | 🔜 week 2 |
-| Identity phase locking (Laroche & Dolson) | 🔜 week 3 |
-| WSOLA time-domain baseline | 🔜 week 3 |
-| Transient detection + phase reset | 🔜 week 4 |
-| Formant-preserving pitch shift | 🔜 week 4 |
+| Standard phase vocoder | ✅ |
+| OLA time-domain baseline | ✅ |
+| Consistency measure $D_M$ + spectral metrics | ✅ |
+| Pitch shifting (stretch + resample) | ✅ |
+| Identity phase locking (Laroche & Dolson) | ✅ |
+| WSOLA (similarity search) | ✅ |
+| Transient detection + phase reset | ✅ |
+| Formant-preserving pitch shift | ✅ |
 | Auto-tune / harmonizer / robot / whisper | 🔜 week 5 |
-| Benchmark harness + metrics | 🔜 week 5 |
+| Full benchmark harness | 🔜 week 5 |
 | Web demo | 🔜 week 6 |
 
 ---
@@ -42,7 +45,7 @@ Week 1 of 6 — foundation complete.
 ## Install
 
 ```bash
-git clone https://github.com/RaisaZirus/ElastiqA
+git clone https://github.com/USERNAME/elastiqa
 cd elastiqa
 pip install -e ".[dev]"
 ```
@@ -70,14 +73,113 @@ ifreq = eq.instantaneous_frequency(X, hop=512)   # radians/sample
 hz = ifreq * sr / (2 * np.pi)
 ```
 
-## Reproduce the week 1 figures
+Time stretching and pitch shifting:
 
-```bash
-python scripts/week1_demo.py
+```python
+slow = eq.time_stretch(x, 1.5)      # 50% longer, same pitch
+down = eq.pitch_shift(x, -7)        # a fifth lower, same length
+
+bad  = eq.time_stretch(x, 1.5, mode="passthrough")   # phase reused: phasey
+robot = eq.time_stretch(x, 1.0, mode="zero")         # phase zeroed
 ```
 
-Writes overlap-add envelopes, a reconstruction error plot, and spectrograms of
-the naive baseline showing formants sliding out of place.
+## Reproduce the figures
+
+```bash
+python scripts/week1_demo.py    # foundation: COLA, reconstruction, the problem
+python scripts/week2_demo.py    # the vocoder, phase modes, metrics
+```
+
+## Results so far
+
+### Formants stay put
+
+A synthetic vowel with resonances at 500 / 1500 / 2500 Hz, shifted seven
+semitones in each direction. Plain shifting scales the formants along with the
+pitch; correction leaves them where they were.
+
+| signal | f0 (Hz) | detected formants (Hz) |
+|---|---:|---|
+| original | 164.6 | 431, 1507, 2519 |
+| plain shift −7 st | 110.2 | 323, 991, 1658 |
+| **formant-preserved −7 st** | **110.2** | **431, 1507, 2498** |
+| plain shift +7 st | 247.8 | 807, 1529, 2218 |
+| **formant-preserved +7 st** | **247.8** | **431, 1518, 2530** |
+
+Pitch moves by exactly the requested interval in both cases. Only the
+resonances differ — and audibly, that is the difference between a chipmunk and
+the same person singing higher.
+
+### Transients survive
+
+Crest factor on synthetic percussion stretched 1.5×. Higher means sharper
+attacks; read it against the original rather than in absolute terms.
+
+| | crest factor | lost |
+|---|---:|---:|
+| original | 11.42 | — |
+| locked vocoder | 9.39 | 2.04 |
+| **+ phase reset at onsets** | **11.02** | **0.40** |
+| WSOLA | 8.69 | 2.73 |
+
+Phase reset recovers 80% of the attack sharpness that plain vocoding loses.
+Onset detection found 8 of 8 planted hits.
+
+### Earlier results
+
+### Four methods, one pure 220 Hz tone
+
+Amplitude warble — relative fluctuation of the analytic envelope. The ideal
+output is a flat envelope, so every deviation is the algorithm's doing.
+
+| stretch | OLA | WSOLA | phase vocoder | + phase locking |
+|---:|---:|---:|---:|---:|
+| 1.5× | 0.0428 | 0.00025 | 0.0080 | **0.00040** |
+| 2.0× | 0.3857 | 0.0559 | 0.0158 | **0.00062** |
+
+At 2× the ordering spans three orders of magnitude, and it matches what you
+hear: OLA warbles badly, WSOLA is much better, the plain vocoder is smoother
+still but phasey, and locking is clean.
+
+Note the crossover — WSOLA tracks the locked vocoder closely up to 1.5× and
+then degrades sharply, which is the known limitation of a similarity search
+that has to pick one compromise offset.
+
+### Phase locking vs. plain propagation
+
+Consistency measure $D_M$ on a 25-harmonic stack:
+
+| stretch | plain | locked | improvement |
+|---:|---:|---:|---:|
+| 1.25 | 0.0097 | 0.00084 | 11× |
+| 1.50 | 0.0099 | 0.00063 | 16× |
+| 2.00 | 0.0188 | 0.00077 | **24×** |
+
+The advantage widens with stretch factor, which is the signature of a fix that
+addresses the actual mechanism rather than masking a symptom.
+
+### Earlier results
+
+Correct phase propagation vs. reusing analysis phase, on the same harmonic
+stack. Identical magnitudes; only phase handling differs.
+
+| stretch | vocoder | passthrough (broken) |
+|---:|---:|---:|
+| 0.50 | **0.0006** | 0.3006 |
+| 0.75 | **0.0001** | 0.0486 |
+| 1.00 | 0.0000 | 0.0000 |
+| 1.25 | **0.0089** | 0.0295 |
+| 1.50 | **0.0096** | 0.0505 |
+| 2.00 | **0.0186** | 0.0968 |
+
+Two things the table shows. Correct phase propagation is up to two orders of
+magnitude more consistent. And the broken mode degrades steadily as frames are
+pulled further apart, which is exactly the audible behaviour — phasiness gets
+worse the harder you stretch.
+
+The advantage narrows on vibrato material (see `figures/06_consistency.png`),
+because the vocoder models each bin as a *slowly varying* sinusoid and vibrato
+strains that assumption. This is the gap that phase locking addresses in week 3.
 
 ---
 

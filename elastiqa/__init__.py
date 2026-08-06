@@ -20,6 +20,21 @@ Quick start
 from .audio_io import have_soundfile, load, normalise, save, to_mono
 from .naive import ratio_to_semitones, resample, semitones_to_ratio, speed_change
 from .phase import expected_phase_advance, instantaneous_frequency, princarg
+from .metrics import (
+    amplitude_warble,
+    consistency,
+    crest_factor,
+    evaluate,
+    log_spectral_distance,
+    ser,
+    spectral_convergence,
+)
+from .pitch import (
+    cepstral_envelope,
+    formant_correct,
+    pitch_shift,
+    pitch_shift_formant,
+)
 from .stft import (
     bin_frequencies,
     check_cola,
@@ -30,7 +45,23 @@ from .stft import (
     window_envelope,
 )
 
-__version__ = "0.1.0"
+from .tsm import (
+    PHASE_MODES,
+    find_peaks,
+    locked_phase_vocoder_stft,
+    ola,
+    phase_vocoder_stft,
+    regions_of_influence,
+    time_stretch,
+    time_stretch_locked,
+    time_stretch_transient,
+    detect_onsets,
+    spectral_flux,
+    wsola,
+)
+from . import viz
+
+__version__ = "0.4.0"
 
 __all__ = [
     # stft
@@ -50,6 +81,31 @@ __all__ = [
     "speed_change",
     "semitones_to_ratio",
     "ratio_to_semitones",
+    # tsm
+    "time_stretch",
+    "phase_vocoder_stft",
+    "ola",
+    "wsola",
+    "time_stretch_locked",
+    "locked_phase_vocoder_stft",
+    "find_peaks",
+    "regions_of_influence",
+    "time_stretch_transient",
+    "detect_onsets",
+    "spectral_flux",
+    "pitch_shift_formant",
+    "formant_correct",
+    "cepstral_envelope",
+    "PHASE_MODES",
+    "pitch_shift",
+    # metrics
+    "consistency",
+    "ser",
+    "spectral_convergence",
+    "log_spectral_distance",
+    "amplitude_warble",
+    "crest_factor",
+    "evaluate",
     # io
     "load",
     "save",
@@ -58,4 +114,3 @@ __all__ = [
     "have_soundfile",
     "__version__",
 ]
-from . import viz
