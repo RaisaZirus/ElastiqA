@@ -29,11 +29,32 @@ from .metrics import (
     ser,
     spectral_convergence,
 )
+from .benchmark import (
+    DEFAULT_METHODS,
+    DEFAULT_STRETCHES,
+    make_test_signals,
+    run_benchmark,
+    to_csv,
+    to_markdown,
+)
+from .effects import (
+    autotune,
+    harmonize,
+    quantize_to_scale,
+    robotize,
+    whisperize,
+)
 from .pitch import (
+    SCALES,
     cepstral_envelope,
     formant_correct,
+    hz_to_midi,
+    midi_to_hz,
     pitch_shift,
     pitch_shift_formant,
+    spectral_pitch_shift,
+    yin_frame,
+    yin_track,
 )
 from .stft import (
     bin_frequencies,
@@ -61,7 +82,7 @@ from .tsm import (
 )
 from . import viz
 
-__version__ = "0.4.0"
+__version__ = "0.6.0"
 
 __all__ = [
     # stft
@@ -96,6 +117,25 @@ __all__ = [
     "pitch_shift_formant",
     "formant_correct",
     "cepstral_envelope",
+    "spectral_pitch_shift",
+    "yin_frame",
+    "yin_track",
+    "hz_to_midi",
+    "midi_to_hz",
+    "SCALES",
+    # effects
+    "autotune",
+    "harmonize",
+    "robotize",
+    "whisperize",
+    "quantize_to_scale",
+    # benchmark
+    "run_benchmark",
+    "make_test_signals",
+    "to_csv",
+    "to_markdown",
+    "DEFAULT_METHODS",
+    "DEFAULT_STRETCHES",
     "PHASE_MODES",
     "pitch_shift",
     # metrics

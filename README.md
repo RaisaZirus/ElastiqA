@@ -21,7 +21,7 @@ measures all of them against each other on the same material.
 
 ## Status
 
-Week 4 of 6 — transient preservation and formant-preserving pitch shift.
+**Complete.** Six weeks, 274 tests, 180 benchmark measurements, live web demo.
 
 | Module | Status |
 |---|---|
@@ -36,11 +36,26 @@ Week 4 of 6 — transient preservation and formant-preserving pitch shift.
 | WSOLA (similarity search) | ✅ |
 | Transient detection + phase reset | ✅ |
 | Formant-preserving pitch shift | ✅ |
-| Auto-tune / harmonizer / robot / whisper | 🔜 week 5 |
-| Full benchmark harness | 🔜 week 5 |
-| Web demo | 🔜 week 6 |
+| YIN pitch detection | ✅ |
+| Spectral pitch shift (time-varying ratio) | ✅ |
+| Auto-tune / harmoniser / robot / whisper | ✅ |
+| Full benchmark harness | ✅ |
+| Web demo (Gradio + Hugging Face Spaces) | ✅ |
 
 ---
+
+## Try it
+
+**[Live demo on Hugging Face Spaces](https://huggingface.co/spaces/USERNAME/elastiqa)** — upload a
+clip or record from the microphone, and hear the difference between a working
+phase vocoder and a broken one.
+
+Or run it locally:
+
+```bash
+pip install -e ".[app]"
+python app.py
+```
 
 ## Install
 
@@ -91,6 +106,43 @@ python scripts/week2_demo.py    # the vocoder, phase modes, metrics
 ```
 
 ## Results so far
+
+### The benchmark
+
+Six methods × five stretch factors × six content classes = 180 rows, in
+`results/benchmark.csv`. Log-spectral distance on mixed content (tone plus
+drums), lower is better:
+
+| method | 0.5× | 0.75× | 1.25× | 1.5× | 2.0× |
+|---|---:|---:|---:|---:|---:|
+| ola | 36.35 | 17.69 | 28.10 | 32.99 | 41.41 |
+| wsola | **36.11** | **16.60** | 25.74 | 31.64 | 39.03 |
+| pv | 46.03 | 34.82 | 25.70 | 23.45 | 22.29 |
+| pv_locked | 40.80 | 28.03 | **19.93** | **18.25** | **15.66** |
+| pv_transient | 39.71 | 26.70 | 20.12 | 18.51 | 15.71 |
+
+**There is a crossover.** WSOLA wins under compression; the phase-locked
+vocoder wins under expansion, by an increasing margin. Neither method is
+simply better, which is exactly why the benchmark spans several content
+classes rather than one — a single-signal comparison would have hidden this.
+
+On percussive material, transient reset wins at three of five stretch factors.
+
+### Auto-tune
+
+A four-note melody sung with a planted detune of −45, +38, −30, +25 cents:
+
+| | mean absolute error |
+|---|---:|
+| input | 34.6 cents |
+| strength = 0.5 | 18.5 cents |
+| strength = 1.0 | **2.1 cents** |
+
+Built on YIN, which is accurate to under 0.1% and — critically — does not make
+octave errors when the second harmonic is louder than the fundamental, as it
+usually is in voiced singing.
+
+### Earlier results
 
 ### Formants stay put
 
