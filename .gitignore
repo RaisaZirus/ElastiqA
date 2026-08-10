@@ -12,3 +12,5 @@ venv/
 .DS_Store
 figures/
 audio/outputs/
+flagged/
+.gradio/

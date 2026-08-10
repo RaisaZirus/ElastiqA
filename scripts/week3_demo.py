@@ -38,8 +38,9 @@ from scipy.signal import hilbert
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import elastiqa as eq  # noqa: E402
 from week1_demo import synth_voice  # noqa: E402
+
+import elastiqa as eq  # noqa: E402
 
 SR = 22050
 N_FFT, HOP = 2048, 512
@@ -59,7 +60,8 @@ METHODS = {
 
 def harmonic_tone(f0=220.0, duration=2.5, n=25):
     t = np.arange(int(duration * SR)) / SR
-    return eq.normalise(sum(np.sin(2 * np.pi * f0 * h * t) / h for h in range(1, n + 1)))
+    partials = sum(np.sin(2 * np.pi * f0 * h * t) / h for h in range(1, n + 1))
+    return eq.normalise(partials)
 
 
 def figure_peaks_and_regions(x: np.ndarray) -> None:

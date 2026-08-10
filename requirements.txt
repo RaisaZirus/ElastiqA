@@ -1,0 +1,8 @@
+# Hugging Face Spaces reads this file. Keep it minimal: Spaces builds from
+# scratch on every push, and each extra package is build time you will be
+# waiting on during a demo.
+numpy>=1.22
+scipy>=1.8
+matplotlib>=3.5
+gradio>=4.0
+soundfile>=0.12   # decodes WAV/FLAC/OGG without ffmpeg

@@ -17,9 +17,23 @@ Quick start
     y = eq.istft(X, hop=512, length=len(x))   # y == x to ~1e-15
 """
 
+from . import viz
 from .audio_io import have_soundfile, load, normalise, save, to_mono
-from .naive import ratio_to_semitones, resample, semitones_to_ratio, speed_change
-from .phase import expected_phase_advance, instantaneous_frequency, princarg
+from .benchmark import (
+    DEFAULT_METHODS,
+    DEFAULT_STRETCHES,
+    make_test_signals,
+    run_benchmark,
+    to_csv,
+    to_markdown,
+)
+from .effects import (
+    autotune,
+    harmonize,
+    quantize_to_scale,
+    robotize,
+    whisperize,
+)
 from .metrics import (
     amplitude_warble,
     consistency,
@@ -29,11 +43,19 @@ from .metrics import (
     ser,
     spectral_convergence,
 )
+from .naive import ratio_to_semitones, resample, semitones_to_ratio, speed_change
+from .phase import expected_phase_advance, instantaneous_frequency, princarg
 from .pitch import (
+    SCALES,
     cepstral_envelope,
     formant_correct,
+    hz_to_midi,
+    midi_to_hz,
     pitch_shift,
     pitch_shift_formant,
+    spectral_pitch_shift,
+    yin_frame,
+    yin_track,
 )
 from .stft import (
     bin_frequencies,
@@ -44,26 +66,25 @@ from .stft import (
     stft,
     window_envelope,
 )
-
 from .tsm import (
     PHASE_MODES,
+    detect_onsets,
     find_peaks,
     locked_phase_vocoder_stft,
     ola,
     phase_vocoder_stft,
     regions_of_influence,
+    spectral_flux,
     time_stretch,
     time_stretch_locked,
     time_stretch_transient,
-    detect_onsets,
-    spectral_flux,
     wsola,
 )
-from . import viz
 
-__version__ = "0.4.0"
+__version__ = "0.6.0"
 
 __all__ = [
+    "viz",
     # stft
     "stft",
     "istft",
@@ -96,6 +117,25 @@ __all__ = [
     "pitch_shift_formant",
     "formant_correct",
     "cepstral_envelope",
+    "spectral_pitch_shift",
+    "yin_frame",
+    "yin_track",
+    "hz_to_midi",
+    "midi_to_hz",
+    "SCALES",
+    # effects
+    "autotune",
+    "harmonize",
+    "robotize",
+    "whisperize",
+    "quantize_to_scale",
+    # benchmark
+    "run_benchmark",
+    "make_test_signals",
+    "to_csv",
+    "to_markdown",
+    "DEFAULT_METHODS",
+    "DEFAULT_STRETCHES",
     "PHASE_MODES",
     "pitch_shift",
     # metrics
