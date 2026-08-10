@@ -343,7 +343,9 @@ def test_effects_preserve_length():
 
 def test_test_signals_are_sane():
     signals = make_test_signals(SR, duration=0.5)
-    assert set(signals) >= {"sine", "harmonic", "vibrato", "percussive", "mixed", "noise"}
+    assert set(signals) >= {
+        "sine", "harmonic", "vibrato", "percussive", "mixed", "noise"
+    }
     for name, x in signals.items():
         assert np.all(np.isfinite(x)), name
         assert np.max(np.abs(x)) <= 1.0 + 1e-9, name

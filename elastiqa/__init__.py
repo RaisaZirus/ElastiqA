@@ -17,18 +17,8 @@ Quick start
     y = eq.istft(X, hop=512, length=len(x))   # y == x to ~1e-15
 """
 
+from . import viz
 from .audio_io import have_soundfile, load, normalise, save, to_mono
-from .naive import ratio_to_semitones, resample, semitones_to_ratio, speed_change
-from .phase import expected_phase_advance, instantaneous_frequency, princarg
-from .metrics import (
-    amplitude_warble,
-    consistency,
-    crest_factor,
-    evaluate,
-    log_spectral_distance,
-    ser,
-    spectral_convergence,
-)
 from .benchmark import (
     DEFAULT_METHODS,
     DEFAULT_STRETCHES,
@@ -44,6 +34,17 @@ from .effects import (
     robotize,
     whisperize,
 )
+from .metrics import (
+    amplitude_warble,
+    consistency,
+    crest_factor,
+    evaluate,
+    log_spectral_distance,
+    ser,
+    spectral_convergence,
+)
+from .naive import ratio_to_semitones, resample, semitones_to_ratio, speed_change
+from .phase import expected_phase_advance, instantaneous_frequency, princarg
 from .pitch import (
     SCALES,
     cepstral_envelope,
@@ -65,26 +66,25 @@ from .stft import (
     stft,
     window_envelope,
 )
-
 from .tsm import (
     PHASE_MODES,
+    detect_onsets,
     find_peaks,
     locked_phase_vocoder_stft,
     ola,
     phase_vocoder_stft,
     regions_of_influence,
+    spectral_flux,
     time_stretch,
     time_stretch_locked,
     time_stretch_transient,
-    detect_onsets,
-    spectral_flux,
     wsola,
 )
-from . import viz
 
 __version__ = "0.6.0"
 
 __all__ = [
+    "viz",
     # stft
     "stft",
     "istft",

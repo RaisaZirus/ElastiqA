@@ -40,8 +40,9 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import elastiqa as eq  # noqa: E402
 from week1_demo import synth_voice  # noqa: E402
+
+import elastiqa as eq  # noqa: E402
 
 SR = 22050
 N_FFT, HOP = 2048, 512

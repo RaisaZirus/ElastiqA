@@ -29,8 +29,6 @@ properties and persist them per browser.
 
 from __future__ import annotations
 
-import numpy as np
-
 try:
     import gradio as gr
 except ImportError as exc:  # pragma: no cover
@@ -217,7 +215,10 @@ footer {{ display:none !important; }}
 }}
 .card.good .tag {{ color: {SIGNAL}; }}
 .card.bad .tag {{ color: {BRASS}; }}
-.card h4 {{ font-size: 0.94rem; font-weight: 550; margin: 0.3rem 0 0.15rem 0; color: {PAPER}; }}
+.card h4 {{
+  font-size: 0.94rem; font-weight: 550;
+  margin: 0.3rem 0 0.15rem 0; color: {PAPER};
+}}
 .card p {{ font-size: 0.79rem; color: {MUTED}; margin: 0; line-height: 1.45; }}
 
 #readout {{
@@ -281,7 +282,9 @@ footer {{ display:none !important; }}
   content: "";
   position: absolute; inset: 0;
   pointer-events: none;
-  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.012) 50%, transparent 80%);
+  background: linear-gradient(
+    110deg, transparent 20%, rgba(255,255,255,0.012) 50%, transparent 80%
+  );
   z-index: 0;
 }}
 #stage > * {{
@@ -295,8 +298,13 @@ footer {{ display:none !important; }}
   border: 1px solid rgba(90,169,230,0.17) !important;
   border-radius: 12px !important;
   background:
-    linear-gradient(135deg, rgba(23,69,110,0.26), rgba(17,28,42,0.90) 52%, rgba(17,28,42,0.72));
-  box-shadow: 0 14px 34px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.025) !important;
+    linear-gradient(
+      135deg, rgba(23,69,110,0.26),
+      rgba(17,28,42,0.90) 52%, rgba(17,28,42,0.72)
+    );
+  box-shadow:
+    0 14px 34px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.025) !important;
 }}
 .sectionhead {{
   position: relative;
@@ -400,7 +408,9 @@ footer {{ display:none !important; }}
   content: "";
   position: absolute; inset: 0;
   pointer-events: none;
-  background: linear-gradient(115deg, transparent 28%, rgba(255,255,255,0.035) 48%, transparent 68%);
+  background: linear-gradient(
+    115deg, transparent 28%, rgba(255,255,255,0.035) 48%, transparent 68%
+  );
   transform: translateX(-115%);
   transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }}
@@ -450,7 +460,9 @@ footer {{ display:none !important; }}
 
 #stage input, #stage textarea, #stage select,
 #preview input, #preview textarea, #preview select {{
-  transition: border-color 170ms ease, box-shadow 170ms ease, background-color 170ms ease;
+  transition:
+    border-color 170ms ease, box-shadow 170ms ease,
+    background-color 170ms ease;
 }}
 #stage input:focus, #stage textarea:focus, #stage select:focus,
 #preview input:focus, #preview textarea:focus, #preview select:focus {{
@@ -493,7 +505,9 @@ footer {{ display:none !important; }}
   background: linear-gradient(180deg, #2A4B68, #20364C);
   border: 2px solid {ABYSS}; border-radius: 999px;
 }}
-*::-webkit-scrollbar-thumb:hover {{ background: linear-gradient(180deg, #376789, #284A66); }}
+*::-webkit-scrollbar-thumb:hover {{
+  background: linear-gradient(180deg, #376789, #284A66);
+}}
 
 @keyframes shellReveal {{
   from {{ opacity: 0; transform: translateY(8px); }}
@@ -729,7 +743,9 @@ def cb_compare_pitch(audio, semitones):
     except ValueError as exc:
         _fail(str(exc))
 
-    plain, _ = al.run_pitch_shift(x, sr, float(semitones), "Plain shift (chipmunk / growl)")
+    plain, _ = al.run_pitch_shift(
+        x, sr, float(semitones), "Plain shift (chipmunk / growl)"
+    )
     fixed, metrics = al.run_pitch_shift(
         x, sr, float(semitones), "Formant-preserving (natural)"
     )

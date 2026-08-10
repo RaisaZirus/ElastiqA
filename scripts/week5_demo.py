@@ -5,7 +5,7 @@ Week 5 demo: musical effects and the full benchmark.
 Generates
 ---------
 figures/16_pitch_tracking.png    YIN f0 track with voicing
-figures/17_autotune.png          detected vs. quantised pitch, and the effect of strength
+figures/17_autotune.png          detected vs. quantised pitch, plus strength
 figures/18_harmonizer.png        spectrum of the harmonised signal
 figures/19_phase_effects.png     robot and whisper, spectrograms and waveforms
 figures/20_benchmark.png         six methods x five stretches, four content classes
@@ -35,8 +35,9 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import elastiqa as eq  # noqa: E402
 from week1_demo import synth_voice  # noqa: E402
+
+import elastiqa as eq  # noqa: E402
 
 SR = 22050
 N_FFT, HOP = 2048, 512

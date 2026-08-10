@@ -9,7 +9,6 @@ measure returns ~0 no matter how badly the vocoder is behaving.
 """
 
 import numpy as np
-import pytest
 
 from elastiqa.metrics import (
     consistency,
@@ -108,7 +107,10 @@ def test_evaluate_returns_expected_keys():
     y, Y = time_stretch(x, 1.5, return_stft=True)
 
     row = evaluate(x, y, stretch=1.5, modified_stft=Y)
-    for key in ("stretch", "spectral_convergence", "log_spectral_distance", "consistency"):
+    for key in (
+        "stretch", "spectral_convergence", "log_spectral_distance",
+        "consistency",
+    ):
         assert key in row
     assert "ser_db" not in row          # only meaningful at stretch = 1
 

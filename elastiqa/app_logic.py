@@ -15,7 +15,6 @@ from typing import Any
 import numpy as np
 
 from . import (
-    amplitude_warble,
     autotune,
     consistency,
     crest_factor,
@@ -97,7 +96,9 @@ def load_path(path: str) -> tuple[int, np.ndarray]:
         pass
     except Exception as exc:
         if suffix not in (".wav", ".wave"):
-            raise ValueError(_FFMPEG_HINT.format(suffix=suffix or "that format")) from exc
+            raise ValueError(
+                _FFMPEG_HINT.format(suffix=suffix or "that format")
+            ) from exc
         raise ValueError(f"Could not read that WAV file: {exc}") from exc
 
     if suffix in (".wav", ".wave"):
@@ -159,7 +160,9 @@ def prepare_audio(
         note = f"Trimmed to the first {max_seconds:.0f} seconds."
 
     if len(x) < 1024:
-        raise ValueError("That clip is too short to analyse. Try at least half a second.")
+        raise ValueError(
+            "That clip is too short to analyse. Try at least half a second."
+        )
 
     peak = float(np.max(np.abs(x)))
     if peak < 1e-6:
@@ -223,7 +226,8 @@ def run_time_stretch(
         "spectral distance": f"{log_spectral_distance(x, y, n_fft, hop):.2f} dB",
     }
     if modified is not None:
-        metrics["consistency (D_M)"] = f"{consistency(modified, hop=hop, n_fft=n_fft):.5f}"
+        d_m = consistency(modified, hop=hop, n_fft=n_fft)
+        metrics["consistency (D_M)"] = f"{d_m:.5f}"
     if key in ("pv_transient", "wsola", "ola"):
         metrics["crest factor"] = (
             f"{crest_factor(y):.2f}  (input {crest_factor(x):.2f})"

@@ -103,7 +103,9 @@ def test_vocoder_beats_passthrough_on_consistency(stretch):
     d_good = consistency(Y_good, hop=512)
     d_bad = consistency(Y_bad, hop=512)
 
-    assert d_good < d_bad, f"vocoder {d_good:.4f} not better than passthrough {d_bad:.4f}"
+    assert d_good < d_bad, (
+        f"vocoder {d_good:.4f} not better than passthrough {d_bad:.4f}"
+    )
 
 
 def test_passthrough_degrades_with_stretch():
