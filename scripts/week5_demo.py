@@ -1,26 +1,3 @@
-#!/usr/bin/env python3
-"""
-Week 5 demo: musical effects and the full benchmark.
-
-Generates
----------
-figures/16_pitch_tracking.png    YIN f0 track with voicing
-figures/17_autotune.png          detected vs. quantised pitch, plus strength
-figures/18_harmonizer.png        spectrum of the harmonised signal
-figures/19_phase_effects.png     robot and whisper, spectrograms and waveforms
-figures/20_benchmark.png         six methods x five stretches, four content classes
-results/benchmark.csv            180 rows -- the full sweep
-results/benchmark_tables.md      markdown tables ready to paste into the README
-
-audio/outputs/
-    sung_flat.wav / sung_autotuned.wav / sung_autotune_half.wav
-    harmonized.wav / robot_voice.wav / whisper_voice.wav
-
-Run from the repository root::
-
-    python scripts/week5_demo.py
-"""
-
 from __future__ import annotations
 
 import sys
@@ -330,3 +307,28 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#!/usr/bin/env python3
+"""
+Week 5 demo: musical effects and the full benchmark.
+
+Generates
+---------
+figures/16_pitch_tracking.png    YIN f0 track with voicing
+figures/17_autotune.png          detected vs. quantised pitch, plus strength
+figures/18_harmonizer.png        spectrum of the harmonised signal
+figures/19_phase_effects.png     robot and whisper, spectrograms and waveforms
+figures/20_benchmark.png         six methods x five stretches, four content classes
+results/benchmark.csv            180 rows -- the full sweep
+results/benchmark_tables.md      markdown tables ready to paste into the README
+
+audio/outputs/
+    sung_flat.wav / sung_autotuned.wav / sung_autotune_half.wav
+    harmonized.wav / robot_voice.wav / whisper_voice.wav
+
+Run from the repository root::
+
+    python scripts/week5_demo.py
+"""
+

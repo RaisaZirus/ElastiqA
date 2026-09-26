@@ -1,27 +1,3 @@
-#!/usr/bin/env python3
-"""
-Week 3 demo: vertical phase coherence, and a five-way method comparison.
-
-Generates
----------
-figures/08_peaks_and_regions.png   peak picking and regions of influence
-figures/09_warble.png              amplitude envelopes -- the audible artefact
-figures/10_method_comparison.png   D_M and warble across five methods
-figures/11_locked_vs_plain.png     spectrograms, plain vs locked
-results/week3_methods.csv          full results table
-
-audio/outputs/
-    m_ola_2x.wav / m_wsola_2x.wav / m_pv_2x.wav / m_locked_2x.wav
-    voice_locked_slow.wav
-
-Listen in this order at 2x: OLA (warbling), WSOLA (better), plain vocoder
-(phasey), locked vocoder (clean). That progression is the project's argument.
-
-Run from the repository root::
-
-    python scripts/week3_demo.py
-"""
-
 from __future__ import annotations
 
 import csv
@@ -263,3 +239,29 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+#!/usr/bin/env python3
+"""
+Week 3 demo: vertical phase coherence, and a five-way method comparison.
+
+Generates
+---------
+figures/08_peaks_and_regions.png   peak picking and regions of influence
+figures/09_warble.png              amplitude envelopes -- the audible artefact
+figures/10_method_comparison.png   D_M and warble across five methods
+figures/11_locked_vs_plain.png     spectrograms, plain vs locked
+results/week3_methods.csv          full results table
+
+audio/outputs/
+    m_ola_2x.wav / m_wsola_2x.wav / m_pv_2x.wav / m_locked_2x.wav
+    voice_locked_slow.wav
+
+Listen in this order at 2x: OLA (warbling), WSOLA (better), plain vocoder
+(phasey), locked vocoder (clean). That progression is the project's argument.
+
+Run from the repository root::
+
+    python scripts/week3_demo.py
+"""
+
