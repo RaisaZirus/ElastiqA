@@ -1,29 +1,3 @@
-#!/usr/bin/env python3
-"""
-Week 4 demo: transient preservation and formant-preserving pitch shift.
-
-Generates
----------
-figures/12_onset_detection.png     waveform, spectral flux, detected onsets
-figures/13_transient_smearing.png  attack detail: plain vs. phase reset
-figures/14_formant_envelope.png    spectrum and cepstral envelope
-figures/15_formants_move.png       the payoff figure -- envelopes overlaid
-results/week4_ablation.csv         ablation table
-
-audio/outputs/
-    drums_plain_15x.wav / drums_transient_15x.wav
-    voice_down7_plain.wav / voice_down7_formant.wav
-    voice_up7_plain.wav   / voice_up7_formant.wav
-
-The pair to play for anyone who asks what the project does:
-voice_down7_plain.wav (growly, wrong) against voice_down7_formant.wav
-(same person, lower).
-
-Run from the repository root::
-
-    python scripts/week4_demo.py
-"""
-
 from __future__ import annotations
 
 import csv
@@ -315,3 +289,31 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+#!/usr/bin/env python3
+"""
+Week 4 demo: transient preservation and formant-preserving pitch shift.
+
+Generates
+---------
+figures/12_onset_detection.png     waveform, spectral flux, detected onsets
+figures/13_transient_smearing.png  attack detail: plain vs. phase reset
+figures/14_formant_envelope.png    spectrum and cepstral envelope
+figures/15_formants_move.png       the payoff figure -- envelopes overlaid
+results/week4_ablation.csv         ablation table
+
+audio/outputs/
+    drums_plain_15x.wav / drums_transient_15x.wav
+    voice_down7_plain.wav / voice_down7_formant.wav
+    voice_up7_plain.wav   / voice_up7_formant.wav
+
+The pair to play for anyone who asks what the project does:
+voice_down7_plain.wav (growly, wrong) against voice_down7_formant.wav
+(same person, lower).
+
+Run from the repository root::
+
+    python scripts/week4_demo.py
+"""
+
