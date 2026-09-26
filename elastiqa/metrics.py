@@ -1,29 +1,3 @@
-"""
-Objective quality metrics for time-scale modification.
-
-The central difficulty of evaluating TSM is that input and output have
-different lengths, so ordinary reference-based audio quality measures cannot
-be applied at all. Only a handful of measures work in this setting, and the
-literature is candid that they are high-level indicators of phasiness rather
-than true perceptual predictors.
-
-That is not a reason to skip them. Having *any* number turns "it sounds worse"
-into something you can plot, bisect, and regression-test. Pair these with a
-listening test rather than trusting either alone.
-
-Measures implemented
---------------------
-``consistency`` (D_M, Laroche & Dolson 1999)
-    The important one, and the only one here that needs no length matching.
-
-``ser``
-    Signal-to-error ratio; only meaningful at stretch = 1.
-
-``spectral_convergence`` and ``log_spectral_distance``
-    Standard magnitude-spectrogram distances, applied after interpolating the
-    reference to the test length.
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -278,3 +252,30 @@ def evaluate(
     if np.isclose(stretch, 1.0):
         out["ser_db"] = ser(reference, test)
     return out
+
+"""
+Objective quality metrics for time-scale modification.
+
+The central difficulty of evaluating TSM is that input and output have
+different lengths, so ordinary reference-based audio quality measures cannot
+be applied at all. Only a handful of measures work in this setting, and the
+literature is candid that they are high-level indicators of phasiness rather
+than true perceptual predictors.
+
+That is not a reason to skip them. Having *any* number turns "it sounds worse"
+into something you can plot, bisect, and regression-test. Pair these with a
+listening test rather than trusting either alone.
+
+Measures implemented
+--------------------
+``consistency`` (D_M, Laroche & Dolson 1999)
+    The important one, and the only one here that needs no length matching.
+
+``ser``
+    Signal-to-error ratio; only meaningful at stretch = 1.
+
+``spectral_convergence`` and ``log_spectral_distance``
+    Standard magnitude-spectrogram distances, applied after interpolating the
+    reference to the test length.
+"""
+

@@ -1,20 +1,3 @@
-"""
-Musical effects built on the vocoder.
-
-Four effects, chosen because each isolates a different piece of the machinery:
-
-``autotune``
-    Pitch detection plus a time-varying shift. The full pipeline end to end.
-
-``harmonize``
-    Several constant shifts mixed together. Shows that the shifter composes.
-
-``robotize`` / ``whisperize``
-    Two lines each, and the clearest possible demonstration of what phase
-    carries: keep the magnitude spectrogram exactly and destroy the phase, and
-    the words survive while the pitch and voice quality do not.
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -237,3 +220,21 @@ def whisperize(
     phase = rng.uniform(-np.pi, np.pi, X.shape)
 
     return istft(np.abs(X) * np.exp(1j * phase), hop=hop, window=window, length=len(x))
+
+"""
+Musical effects built on the vocoder.
+
+Four effects, chosen because each isolates a different piece of the machinery:
+
+``autotune``
+    Pitch detection plus a time-varying shift. The full pipeline end to end.
+
+``harmonize``
+    Several constant shifts mixed together. Shows that the shifter composes.
+
+``robotize`` / ``whisperize``
+    Two lines each, and the clearest possible demonstration of what phase
+    carries: keep the magnitude spectrogram exactly and destroy the phase, and
+    the words survive while the pitch and voice quality do not.
+"""
+

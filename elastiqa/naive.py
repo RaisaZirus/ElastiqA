@@ -1,17 +1,3 @@
-"""
-Naive resampling: the baseline the whole project exists to beat.
-
-Playing a recording back at a different sample rate changes its duration and
-its pitch together, locked to the same ratio. This is what a tape machine does
-when you spin it faster, and it is why a sped-up voice sounds like a chipmunk:
-every frequency component -- including the vocal-tract resonances (formants)
-that identify the speaker -- is scaled by the same factor.
-
-Every subsequent module in ElastiqA is an attempt to break that coupling.
-Keep this baseline in every comparison; it is the clearest possible statement
-of the problem.
-"""
-
 from __future__ import annotations
 
 import numpy as np
@@ -69,3 +55,18 @@ def ratio_to_semitones(ratio: float) -> float:
     if ratio <= 0:
         raise ValueError(f"ratio must be positive; got {ratio}")
     return float(12.0 * np.log2(ratio))
+
+"""
+Naive resampling: the baseline the whole project exists to beat.
+
+Playing a recording back at a different sample rate changes its duration and
+its pitch together, locked to the same ratio. This is what a tape machine does
+when you spin it faster, and it is why a sped-up voice sounds like a chipmunk:
+every frequency component -- including the vocal-tract resonances (formants)
+that identify the speaker -- is scaled by the same factor.
+
+Every subsequent module in ElastiqA is an attempt to break that coupling.
+Keep this baseline in every comparison; it is the clearest possible statement
+of the problem.
+"""
+
