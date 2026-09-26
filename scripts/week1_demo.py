@@ -1,21 +1,3 @@
-#!/usr/bin/env python3
-"""
-Week 1 demo: prove the foundation works, and show the problem to be solved.
-
-Generates
----------
-figures/01_cola_envelope.png     individual windows and their overlap-add sum
-figures/02_reconstruction.png    input, output, and error of the STFT round trip
-figures/03_naive_chipmunk.png    spectrograms showing pitch dragged along by speed
-audio/original.wav               a synthetic voice-like test signal
-audio/naive_fast.wav             1.5x faster -- and a perfect fifth sharp
-audio/naive_slow.wav             0.67x slower -- and correspondingly flat
-
-Run from the repository root::
-
-    python scripts/week1_demo.py
-"""
-
 from __future__ import annotations
 
 import sys
@@ -180,3 +162,22 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+#!/usr/bin/env python3
+"""
+Week 1 demo: prove the foundation works, and show the problem to be solved.
+
+Generates
+---------
+figures/01_cola_envelope.png     individual windows and their overlap-add sum
+figures/02_reconstruction.png    input, output, and error of the STFT round trip
+figures/03_naive_chipmunk.png    spectrograms showing pitch dragged along by speed
+audio/original.wav               a synthetic voice-like test signal
+audio/naive_fast.wav             1.5x faster -- and a perfect fifth sharp
+audio/naive_slow.wav             0.67x slower -- and correspondingly flat
+
+Run from the repository root::
+
+    python scripts/week1_demo.py
+"""

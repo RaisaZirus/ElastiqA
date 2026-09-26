@@ -1,30 +1,3 @@
-#!/usr/bin/env python3
-"""
-Week 2 demo: the phase vocoder, and proof that phase handling is what matters.
-
-Generates
----------
-figures/04_pitch_preserved.png    naive vs vocoder spectrograms at 1.5x slower
-figures/05_phase_modes.png        the four phase modes, side by side
-figures/06_consistency.png        D_M against stretch factor for every method
-figures/07_waveform_detail.png    zoomed waveforms showing frame cancellation
-results/week2_metrics.csv         the full results table
-
-audio/outputs/
-    pv_slow.wav / pv_fast.wav             correct vocoder
-    broken_slow.wav                       passthrough phase -- listen for phasiness
-    ola_slow.wav                          time-domain baseline
-    robot.wav / whisper.wav               zeroed and randomised phase
-    pitch_down_7.wav / pitch_up_5.wav     pitch shifting
-
-The A/B that matters is pv_slow.wav against broken_slow.wav. Same magnitudes,
-same stretch factor, same everything except how phase was propagated.
-
-Run from the repository root::
-
-    python scripts/week2_demo.py
-"""
-
 from __future__ import annotations
 
 import csv
@@ -320,3 +293,32 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+#!/usr/bin/env python3
+"""
+Week 2 demo: the phase vocoder, and proof that phase handling is what matters.
+
+Generates
+---------
+figures/04_pitch_preserved.png    naive vs vocoder spectrograms at 1.5x slower
+figures/05_phase_modes.png        the four phase modes, side by side
+figures/06_consistency.png        D_M against stretch factor for every method
+figures/07_waveform_detail.png    zoomed waveforms showing frame cancellation
+results/week2_metrics.csv         the full results table
+
+audio/outputs/
+    pv_slow.wav / pv_fast.wav             correct vocoder
+    broken_slow.wav                       passthrough phase -- listen for phasiness
+    ola_slow.wav                          time-domain baseline
+    robot.wav / whisper.wav               zeroed and randomised phase
+    pitch_down_7.wav / pitch_up_5.wav     pitch shifting
+
+The A/B that matters is pv_slow.wav against broken_slow.wav. Same magnitudes,
+same stretch factor, same everything except how phase was propagated.
+
+Run from the repository root::
+
+    python scripts/week2_demo.py
+"""
+
