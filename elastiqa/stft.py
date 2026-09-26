@@ -49,8 +49,12 @@ def get_window(name: str, n_fft: int, periodic: bool = True) -> np.ndarray:
     Parameters
     ----------
     name
-        One of ``"hann"``, ``"hamming"``, ``"blackman"``, ``"rect"``,
-        or ``"sqrt_hann"``.
+        One of 
+        ``"hann"``, 
+        ``"hamming"``, 
+        ``"blackman"``, 
+        ``"rect"``, or
+        ``"sqrt_hann"``.
     n_fft
         Window length in samples.
     periodic
@@ -152,14 +156,10 @@ def stft(
 
     Parameters
     ----------
-    x
-        Real-valued 1-D input signal.
-    n_fft
-        FFT size and window length.
-    hop
-        Analysis hop in samples. Defaults to ``n_fft // 4`` (75% overlap).
-    window
-        Window name or a precomputed array of length ``n_fft``.
+    x = Real-valued 1-D input signal.
+    n_fft = FFT size and window length.
+    hop = Analysis hop in samples. Defaults to ``n_fft // 4`` (75% overlap).
+    window = Window name or a precomputed array of length ``n_fft``.
     center
         Pad by ``n_fft // 2`` on each side so frame ``m`` is centred on
         sample ``m * hop``.
@@ -211,13 +211,10 @@ def istft(
 
     Parameters
     ----------
-    X
-        Complex STFT of shape ``(n_bins, n_frames)`` as produced by `stft`.
-    hop
-        Synthesis hop. Must match the analysis hop for exact inversion; the
+    X = Complex STFT of shape ``(n_bins, n_frames)`` as produced by `stft`.
+    hop = Synthesis hop. Must match the analysis hop for exact inversion; the
         phase vocoder deliberately makes it differ.
-    window
-        Synthesis window. Must match the analysis window for exact inversion.
+    window = Synthesis window. Must match the analysis window for exact inversion.
     center
         Whether the forward transform was centred (trims the padding).
     length
