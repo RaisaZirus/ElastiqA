@@ -69,12 +69,9 @@ def instantaneous_frequency(
 
     Parameters
     ----------
-    X
-        Complex STFT, shape ``(n_bins, n_frames)``.
-    hop
-        The *analysis* hop used to produce ``X``.
-    n_fft
-        FFT size. Inferred from ``X.shape[0]`` when omitted.
+    X = Complex STFT, shape ``(n_bins, n_frames)``.
+    hop = The *analysis* hop used to produce ``X``.
+    n_fft = FFT size. Inferred from ``X.shape[0]`` when omitted.
 
     Returns
     -------

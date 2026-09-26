@@ -24,10 +24,8 @@ def resample(x: np.ndarray, ratio: float) -> np.ndarray:
 
     Parameters
     ----------
-    x
-        Input signal.
-    ratio
-        Output length multiplier. ``ratio = 2.0`` produces twice as many
+    x = Input signal.
+    ratio = Output length multiplier. ``ratio = 2.0`` produces twice as many
         samples, so playback at the original sample rate is twice as long and
         one octave lower.
 

@@ -246,13 +246,15 @@ def evaluate(
 
     Parameters
     ----------
-    reference
-        The original signal.
-    test
-        The time-scaled output.
-    stretch
-        The factor that was applied, recorded in the output row.
-    modified_stft
+    reference = The original signal.
+    test = The time-scaled output.
+    stretch = The factor that was applied, recorded in the output row.
+    modified_stft = The STFT the algorithm produced *before* resynthesis, as returned by
+        ``time_stretch(..., return_stft=True)``. Required for the consistency
+        measure. Passing ``stft(test)`` instead would always give ~0, because
+        the transform of a real signal is consistent by construction -- an easy
+        mistake that silently makes every algorithm look perfect.
+
         The STFT the algorithm produced *before* resynthesis, as returned by
         ``time_stretch(..., return_stft=True)``. Required for the consistency
         measure. Passing ``stft(test)`` instead would always give ~0, because
