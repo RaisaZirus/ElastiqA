@@ -3,8 +3,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/USERNAME/elastiqa
-cd elastiqa
+git clone https://github.com/RaisaZirus/ElastiqA
+cd ElastiqA
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 pytest

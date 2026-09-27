@@ -1021,7 +1021,7 @@ better under expansion, and the gap widens the harder you push.
                     gr.HTML(
                         '<p class="note" style="margin-top:1.2rem">Source, tests '
                         'and the full benchmark: <a href="https://github.com/'
-                        'USERNAME/elastiqa">github.com/USERNAME/elastiqa</a></p>'
+                        'RaisaZirus/ElastiqA">github.com/RaisaZirus/ElastiqA</a></p>'
                     )
 
             # ---------------- preview ----------------

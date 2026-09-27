@@ -20,4 +20,4 @@ independent — with the measurements to show it works.
 WAV works without it.
 
 Built for a Signals and Linear Systems course. Source, tests, and the full
-benchmark: https://github.com/USERNAME/elastiqa
+benchmark: https://github.com/RaisaZirus/ElastiqA

@@ -2,7 +2,7 @@
 
 **Phase-coherent time stretching and pitch shifting in Python — with a reproducible benchmark of the algorithms that do it.**
 
-[![tests](https://github.com/USERNAME/elastiqa/actions/workflows/tests.yml/badge.svg)](https://github.com/USERNAME/elastiqa/actions)
+[![tests](https://github.com/RaisaZirus/ElastiqA/actions/workflows/tests.yml/badge.svg)](https://github.com/RaisaZirus/ElastiqA/actions)
 ![python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
@@ -46,7 +46,7 @@ measures all of them against each other on the same material.
 
 ## Try it
 
-**[Live demo on Hugging Face Spaces](https://huggingface.co/spaces/USERNAME/elastiqa)** — upload a
+**[Live demo on Hugging Face Spaces](https://huggingface.co/spaces/RaisaZirus/ElastiqA)** — upload a
 clip or record from the microphone, and hear the difference between a working
 phase vocoder and a broken one.
 
@@ -60,8 +60,8 @@ python app.py
 ## Install
 
 ```bash
-git clone https://github.com/USERNAME/elastiqa
-cd elastiqa
+git clone https://github.com/RaisaZirus/ElastiqA
+cd ElastiqA
 pip install -e ".[dev]"
 ```
 
